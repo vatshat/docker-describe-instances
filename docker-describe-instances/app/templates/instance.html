@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<a href="/"><p><button type="button" class="btn btn-default well">Back to list instances</button></p></a>
+
+<pre id="instance" class="well"></pre>
+
+<script>
+    document.getElementById("instance").innerHTML = JSON.stringify({{ instance_data | safe}}, null, 4);
+</script>
+
+{% endblock %}

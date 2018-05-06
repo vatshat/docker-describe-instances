@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Running Instances{% endblock %}
+
+{% block content %}
+	<div ng-app="myApps">
+		<div class=table-responsive>
+			<div>
+				<form>
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon"><i class="fa fa-search"></i></div>
+							<input type="text" class="form-control" placeholder="Search for an instance" ng-model="search">
+						</div>      
+					</div>
+				</form>
+			</div>
+			<ng-view></ng-view>
+	    </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/angular_app.js') }}"></script>
+{% endblock %}

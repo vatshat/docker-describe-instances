@@ -1,0 +1,11 @@
+{
+    "dev": {
+        "app_function": "describe_running_instances.app",
+        "aws_region": "eu-west-1",
+        "profile_name": "default",
+        "slim_handler": "true",
+        "project_name": "bsc-repo",
+        "runtime": "python3.6",
+        "s3_bucket": "zappa-eikfot3et"
+    }
+}
