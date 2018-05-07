@@ -1,9 +1,1 @@
-#ignoring all Python packages in environment
-
-**/bin
-**/lib
-**/lib64
-**/man
-pip-selfcheck.json
-/local
-/include
+/__pycache__

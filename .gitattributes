@@ -1,2 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+#  Steps to clear out the history of a git/github repository
+# https://gist.github.com/stephenhardy/5470814
+
+# http://www.siliconfidential.com/articles/15-seconds-to-cleaner-git-history/
+# https://stackoverflow.com/questions/39361884/git-cleanup-or-delete-commit-to-cleanup-the-commit-history
