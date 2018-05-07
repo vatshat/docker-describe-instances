@@ -15,6 +15,10 @@ chown -R ec2-user:ec2-user bsc-repo
 
 cd /home/ec2-user/bsc-repo/docker-describe-instances
 
-docker-compose build
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+# Paste access key without (double) quotation marks
+
+docker-compose build --build-arg var_name=${AWS_ACCESS_KEY_ID} --build-arg var_name=${AWS_SECRET_ACCESS_KEY}
 docker-compose -f docker-compose.local.yml up -d --force-recreate
 docker-compose up -d --force-recreate
