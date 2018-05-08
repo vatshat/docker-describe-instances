@@ -1,0 +1,53 @@
+<div ng-if="home">
+	<table class="table table-striped table-bordered table-hover">
+		 <thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">InstanceId</th>
+				<th scope="col">PublicIpAddress</th>
+				<th scope="col">Region</th>
+			</tr>
+		</thread>
+		<tbody>
+			{# example of bypassing AngualarJS and putting Python dict straight into HTML
+				{% for instance in list_running_instance[0] %}
+					<tr>
+						<td scope="row">{{loop.index}}</td>
+						<td>{{instance}}</td>
+						<td>{{list_running_instance[1][loop.index -1]}}</td>
+						<td>{{list_running_instance[2][loop.index -1]}}</td>
+					</tr>
+				{%endfor %}
+				{% for instance in get_running_instance %}
+					<tr>
+						<td scope="row">{{loop.index}}</td>
+						<td>{{instance[0]}}</td>
+						<td>{{instance[1]}}</td>
+						<td>{{instance[2]}}</td>
+					</tr>
+				{%endfor %} 
+			#}
+			
+			<tr ng-repeat="x in instances | filter:search" >
+				<td scope="row">{{ '{{ $index }}' }} </td>
+  				<!--https://codehandbook.org/angularjs-not-working-in-python-flask-web-app/-->
+				<td>
+				    <a ng-href={{ "instance/{{x[0]}}" }}>
+				        {{ '{{ x[0] }}' }}
+			        </a>
+			    </td>
+				<td>
+				    <a ng-href={{ "instance/{{x[0]}}" }}>
+				        {{ '{{ x[1] }}' }}
+			        </a>
+		        </td>
+				<td>
+				    <a ng-href={{ "instance/{{x[0]}}" }}>
+				        {{ '{{ x[2] | lowercase }}' }}
+				    </a>
+			    </td>
+			</tr>
+			
+		</tbody>
+	</table>
+</div>
