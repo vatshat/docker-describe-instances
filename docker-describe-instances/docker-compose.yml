@@ -1,18 +1,29 @@
-server:
-  restart: always
-  image: nginx:alpine
-  volumes:
-    - ./server/conf.d:/etc/nginx/conf.d
-    - ./app/static:/app/static
-  links:
+services:
+  server:
+    image: nginx:alpine
+    links:
     - web:web
-  ports:
-    - "80:80"
+    network_mode: bridge
+    ports:
+    - 80:80/tcp
+    restart: always
+    volumes:
+    - /home/ec2-user/bsc-repo/docker-describe-instances/server/conf.d:/etc/nginx/conf.d:rw
+    - /home/ec2-user/bsc-repo/docker-describe-instances/app/static:/app/static:rw
+  web:
+    build:
+      context: /home/ec2-user/bsc-repo/docker-describe-instances/app
+      args:
+        - secret_access_key
+        - access_key_id
 
-web:
-  extends:
-    file: docker-compose.base.yml
-    service: web
-  expose:
-    - "8000"
-  command: gunicorn app:app -b :8000 --name app --log-level=debug --log-file=-
+    command: gunicorn app:app -b :8000 --name app --log-level=debug --log-file=-
+    expose:
+    - '8000'
+    network_mode: bridge
+    restart: always
+    volumes:
+    - /home/ec2-user/bsc-repo/docker-describe-instances/app:/app:rw
+    working_dir: /app
+
+version: '3'
