@@ -11,6 +11,8 @@ FROM python:3.6-alpine
 # https://michaelheap.com/extract-substring-values-jq
 # instance_role=curl -s 169.254.169.254/latest/meta-data/iam/info | jq ".InstanceProfileArn" | sed -e 's/^"//' -e 's/"$//' | awk -F'/' '{print $2}'
 
+RUN apk add --no-cache curl
+RUN apk add --no-cache jq
 RUN curl -o /usr/local/bin/jq http://stedolan.github.io/jq/download/linux64/jq && \
   chmod +x /usr/local/bin/jq
 
@@ -22,3 +24,5 @@ ENV AWS_DEFAULT_REGION=eu-west-1
 
 COPY requirements.txt .
 RUN pip install -r ./requirements.txt
+
+CMD gunicorn app:app -b :8000 --name app --log-level=debug --log-file=-
