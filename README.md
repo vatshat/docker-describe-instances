@@ -1,4 +1,6 @@
+--------------
 [Learn To Code] [BSC]
+--------------
 
 To avoid confusion, ignore everything else and only focus on the files of interest:
 1. Bash script - ec2-user-data.sh
