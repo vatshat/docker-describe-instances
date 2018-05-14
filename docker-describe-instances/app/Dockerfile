@@ -3,7 +3,7 @@ FROM python:3.6-alpine
 # https://vsupalov.com/docker-build-pass-environment-variables/
 # https://blog.bekt.net/p/docker-aws-credentials/
 
-ARG access_key_id_key-id
+ARG access_key_id
 ARG secret_access_key
 ARG session_token
 ARG aws_default_region
