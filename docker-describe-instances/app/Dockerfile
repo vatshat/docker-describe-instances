@@ -6,6 +6,7 @@ FROM python:3.6-alpine
 ARG access_key_id_key-id
 ARG secret_access_key
 ARG session_token
+ARG aws_default_region
 ENV AWS_ACCESS_KEY_ID=$access_key_id
 ENV AWS_SECRET_ACCESS_KEY=$secret_access_key
 ENV AWS_DEFAULT_REGION=$aws_default_region

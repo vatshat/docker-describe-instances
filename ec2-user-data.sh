@@ -6,8 +6,8 @@
 yum -y update
 yum install -y epel-release
 yum install -y docker
-curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/bin/docker-compose
+chmod +x /usr/bin/docker-compose
 yum install -y git
 yum install -y jq
 PATH=$PATH:/usr/local/bin
@@ -37,7 +37,9 @@ secret_access_key=$(curl -s http://169.254.169.254/latest/meta-data/iam/security
 export AWS_SECRET_ACCESS_KEY=$secret_access_key
 session_token=$(curl -s http://169.254.169.254/latest/meta-data/iam/security-credentials/"$instance_role"); session_token=$(jq --raw-output ".Token" <<< $session_token)
 export AWS_SESSION_TOKEN=$session_token
+aws_default_region=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed 's/.$//')
+export AWS_DEFAULT_REGION=$aws_default_region
 
-/usr/local/bin/docker-compose build --build-arg access_key_id=$access_key_id --build-arg secret_access_key=$secret_access_key --build-arg aws_default_region=$aws_default_region --build-arg session_token=$session_token
-/usr/local/bin/docker-compose -f docker-compose.local.yml up -d --force-recreate
-/usr/local/bin/docker-compose up -d --force-recreate
+docker-compose build --build-arg access_key_id=$access_key_id --build-arg secret_access_key=$secret_access_key --build-arg aws_default_region=$aws_default_region --build-arg session_token=$session_token
+docker-compose -f docker-compose.local.yml up -d --force-recreate
+docker-compose up -d --force-recreate
