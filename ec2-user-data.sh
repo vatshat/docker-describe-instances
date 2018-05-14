@@ -32,13 +32,13 @@ service docker start
 instance_role=$(curl -s http://169.254.169.254/latest/meta-data/iam/info | jq -r '. | map(.)[2] | split("/")[1]')
 
 access_key_id=$(curl -s http://169.254.169.254/latest/meta-data/iam/security-credentials/"$instance_role"); access_key_id=$(jq --raw-output ".AccessKeyId" <<< $access_key_id)
-export AWS_ACCESS_KEY_ID=$access_key_id
+#export AWS_ACCESS_KEY_ID=$access_key_id
 secret_access_key=$(curl -s http://169.254.169.254/latest/meta-data/iam/security-credentials/"$instance_role"); secret_access_key=$(jq --raw-output ".SecretAccessKey" <<< $secret_access_key)
-export AWS_SECRET_ACCESS_KEY=$secret_access_key
+#export AWS_SECRET_ACCESS_KEY=$secret_access_key
 session_token=$(curl -s http://169.254.169.254/latest/meta-data/iam/security-credentials/"$instance_role"); session_token=$(jq --raw-output ".Token" <<< $session_token)
-export AWS_SESSION_TOKEN=$session_token
+#export AWS_SESSION_TOKEN=$session_token
 aws_default_region=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed 's/.$//')
-export AWS_DEFAULT_REGION=$aws_default_region
+#export AWS_DEFAULT_REGION=$aws_default_region
 
 docker-compose build --build-arg access_key_id=$access_key_id --build-arg secret_access_key=$secret_access_key --build-arg aws_default_region=$aws_default_region --build-arg session_token=$session_token
 docker-compose -f docker-compose.local.yml up -d --force-recreate
