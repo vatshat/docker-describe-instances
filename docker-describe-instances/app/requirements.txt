@@ -50,4 +50,4 @@ visitor==0.1.3
 wcwidth==0.1.7
 Werkzeug==0.12
 wsgi-request-logger==0.4.6
-gunicorn==19.4.5
+gunicorn==19.5.0
